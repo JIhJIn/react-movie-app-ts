@@ -2,6 +2,7 @@ const API_KEY = import.meta.env.VITE_TMDB_API_KEY
 const BASE_URL = import.meta.env.VITE_TMDB_BASE_URL
 
 import axios from "axios"
+import type { SearchMovieResponse } from "../types/movie"
 
 const movieApi = axios.create({
     baseURL : BASE_URL,
@@ -12,7 +13,7 @@ const movieApi = axios.create({
 
 export default movieApi
 
-export const getPopularMovies = async () => {
+export const getPopularMovies = async (): Promise <SearchMovieResponse> => {
     const response = await movieApi.get("/movie/popular")
     return response.data
 }
