@@ -17,3 +17,8 @@ export const getPopularMovies = async (): Promise <SearchMovieResponse> => {
     const response = await movieApi.get("/movie/popular")
     return response.data
 }
+
+export const searchMovies = async (query : string): Promise <SearchMovieResponse> => {
+    const response = await movieApi.get("search/movie",{ params : {query} })
+    return response.data
+}

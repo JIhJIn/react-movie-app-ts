@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import type { Movie } from "./types/movie"
-import { getPopularMovies } from "./services/movieApi"
+import { getPopularMovies, searchMovies } from "./services/movieApi"
 import Card from "./components/Card"
 import Search from "./components/Search"
 
@@ -8,9 +8,10 @@ function App() {
   const [movies,setMovies] = useState<Movie[]>([]) // 영화 데이터를 저장할 state
   const [loading,setLoading] = useState(true)
   const [error,setError] = useState(false)
-  const [searchQuery,setSearchQuery] = useState("") // 검색어 저장 state
+  const [noResult,setNoResult] = useState(false)
 
   //API 불러오는 코드
+  //초기 화면 인기 영화 20개 보여주는 코드
   useEffect(()=> {
       const fetchData = async () => {
         //에러 발생 시 try-catch문
@@ -27,19 +28,34 @@ function App() {
       fetchData()
   }, [])
 
-  //Search.tsx에 있는 searchValue 값을 가지고 옴(검색 결과)
-  const searchValue = (value : string) => {
-    setSearchQuery(value)
+  //Search.tsx에서 검색어를 받아와 api를 호출 후 저장
+  const handleSearch = async (value : string) => {
+    try {
+      setNoResult(false)
+    const data = await searchMovies(value)
+    setMovies(data.results)
+    if(data.results.length === 0) {
+      console.log("검색 결과 없음")
+      setNoResult(true)
+    }
+    } catch (error) {
+      setError(true)
+      console.log("네트워크 오류 발생")
+    }
   }
-
-  //Movie 배열에서 searchValue 값을 필터링하는 함수
-  const filterMovies = movies.filter((movie) => movie.title.toLowerCase().includes(searchQuery.toLowerCase()))
-
+  
   if(loading) return <p>로딩 중입니다...</p>
   if(error) return <p>API 주소가 잘못되었습니다 새로고침해주세요</p>
+  if(noResult) return ( 
+    <div>
+      <Search search = {handleSearch}/>
+      <p>검색 결과가 없습니다</p>
+    </div>
+  )
+
   return (<div className="App">
-    <Search search = {searchValue}/>
-    <Card movies = {filterMovies}/>
+    <Search search = {handleSearch}/>
+    <Card movies = {movies}/>
   </div>
   )
 }

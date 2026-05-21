@@ -15,6 +15,10 @@ const Search = ({search} : Props) => {
     
     const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if(e.key === "Enter") {
+            if(searchValue === "") {
+                alert("검색어가 비어있습니다.")
+                return
+            } 
             search(searchValue)
         }
     }
