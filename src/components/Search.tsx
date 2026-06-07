@@ -8,6 +8,14 @@ const Search = ({search} : Props) => {
 
     const [searchValue,setSearchValue] = useState("")
 
+    const handleSearch = () => {
+        if(searchValue === "") {
+                alert("검색어가 비어있습니다.")
+                return
+            } 
+            search(searchValue)
+    }
+
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value)
         // console.log(e.target.value)
@@ -15,18 +23,14 @@ const Search = ({search} : Props) => {
     
     const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if(e.key === "Enter") {
-            if(searchValue === "") {
-                alert("검색어가 비어있습니다.")
-                return
-            } 
-            search(searchValue)
+            handleSearch()
         }
     }
     
     return (
         <div>
             <input type="text" value={searchValue} onChange={onChange} onKeyDown={onKeyDown}/>
-            <button>검색</button>
+            <button onClick={handleSearch}>검색</button>
         </div>
     )
 }

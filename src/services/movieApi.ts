@@ -22,3 +22,8 @@ export const searchMovies = async (query : string): Promise <SearchMovieResponse
     const response = await movieApi.get("search/movie",{ params : {query} })
     return response.data
 }
+
+export const getMovieDetail = async (id: number) => {
+    const response = await movieApi.get(`/movie/${id}`)
+    return response.data
+}
