@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import type { Movie } from "../types/movie"
 import { getPopularMovies, searchMovies } from "../services/movieApi"
 import Card from "../components/Card"
-import Search from "../components/Search"
 import Header from "../components/Header"
 
 function HomePage() {

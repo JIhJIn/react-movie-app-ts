@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 //페이지 컴포넌트
 import MainPage from "./pages/HomePage"
 import DetailPage from "./pages/DetailPage"
+import "./styles/App.css"
 
 function App() {
   return (

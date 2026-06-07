@@ -15,6 +15,7 @@ function Header({search} : Props) {
         <div className="headerComponent">
             <button onClick={goToMainPage}>홈 버튼</button>
             {search && <Search search={search}/>}
+            <div>로그인 구현 예정</div>
         </div>
     )
 }

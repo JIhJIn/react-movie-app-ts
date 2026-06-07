@@ -1,4 +1,5 @@
 import { useState } from "react"
+import "./Search.css"
 
 type Props = {
     search : (value : string) => void
@@ -28,9 +29,9 @@ const Search = ({search} : Props) => {
     }
     
     return (
-        <div>
-            <input type="text" value={searchValue} onChange={onChange} onKeyDown={onKeyDown}/>
-            <button onClick={handleSearch}>검색</button>
+        <div className="searchComponent">
+            <input type="text" value={searchValue} onChange={onChange} onKeyDown={onKeyDown} placeholder="검색어를 입력하세요"/>
+            <button onClick={handleSearch} >검색</button>
         </div>
     )
 }

@@ -26,13 +26,17 @@ const DetailPage = () => {
     if (!movieData) return <div>로딩중...</div>
 
     return (
-    <div className="detailPage">
+    <div>
         <Header/>
+        <div className="detailPage">
             <img src={"https://image.tmdb.org/t/p/w200" + movieData.poster_path} alt="포스터 사진" className="movieImg"/>
-            <div className="movieTitle">제목 : {movieData.title}</div>
-            <div className="movieVoteAverage">평점 : {movieData.vote_average.toFixed(1)}</div>
-            <div className="release_date">개봉일 : {movieData.release_date}</div>
-            <div className="overview">줄거리 : {movieData.overview}</div>
+            <div className="movieInfo">   
+                <div className="movieTitle">제목 : {movieData.title}</div>
+                <div className="movieVoteAverage">평점 : {movieData.vote_average.toFixed(1)}</div>
+                <div className="release_date">개봉일 : {movieData.release_date}</div>
+                <div className="overview">줄거리 : {movieData.overview}</div>
+            </div>
+        </div>
     </div>
     )
 }
